@@ -1,2 +1,2 @@
-This is a grid-like structure I'm creating. I am aware I could have a better performance with a 2D array but I wanted to research generic classes, interfaces and and all kinds of abstraction.
+This is a grid-like structure I'm creating. I am aware I could have a better performance with a 2D array but I wanted to research generic classes, interfaces and and all kinds of abstraction (and it is more fun for me than using 2d array)
 The use of this will be for game development and because I know the maximum size of the grid will be around 20x20, Im hoping it wont affect performance on a significant level.
