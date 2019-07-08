@@ -184,11 +184,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jose_\\Desktop\\Creative\\DataStructures\\DataStructures\\DataStructures\\DataStructures.csproj",
+      "projectUniqueName": "C:\\Users\\jose_\\Desktop\\Creative\\DataStructures\\DataStructuresLib\\DataStructures\\DataStructures.csproj",
       "projectName": "DataStructures",
-      "projectPath": "C:\\Users\\jose_\\Desktop\\Creative\\DataStructures\\DataStructures\\DataStructures\\DataStructures.csproj",
+      "projectPath": "C:\\Users\\jose_\\Desktop\\Creative\\DataStructures\\DataStructuresLib\\DataStructures\\DataStructures.csproj",
       "packagesPath": "C:\\Users\\jose_\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jose_\\Desktop\\Creative\\DataStructures\\DataStructures\\DataStructures\\obj\\",
+      "outputPath": "C:\\Users\\jose_\\Desktop\\Creative\\DataStructures\\DataStructuresLib\\DataStructures\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
