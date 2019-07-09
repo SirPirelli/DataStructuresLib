@@ -21,6 +21,10 @@ Also I wanted to not have the TypeID var explicit in the QuadNode class, neither
 but I wasnt being able to implement it the way I wanted to, through interfaces.
 I need more research on the subject.
 
+    09/07/2019
+    -Data Structure is working as intended. Now it needs helper functions such as getting the T object instead of the full QuadNode. For the purposes Im doing
+        this I dont need to delete nodes, I'll just create a new Grid everytime
+
  */
 
 using System.Collections.Generic;
@@ -35,201 +39,12 @@ namespace DataStructures.Grid
     public class Grid<T>
     {
 
-        /// <summary>
-        /// Enum of relative positions
-        /// </summary>
-        public enum Neighbours { Top, Left, Bottom, Right, None }
 
         /// <summary>
         /// Da gird
         /// </summary>
         QuadNode<T>[] _columnsRoots;
         public int NumberOfColumns { get; protected set; }
-
-
-#pragma warning disable CS0693 // Type parameter has the same name as the type parameter from outer type
-        public class QuadNode<T>
-#pragma warning restore CS0693 // Type parameter has the same name as the type parameter from outer type
-        {
-            public QuadNode()
-            {
-                TypeID = -1;
-                Top = null;
-                Left = null;
-                Bottom = null;
-                Right = null;
-            }
-
-            public QuadNode(int typeID)
-            {
-                TypeID = typeID;
-            }
-
-            public int TypeID { get; set; }
-
-
-            public QuadNode<T> Top { get; set; }
-
-            public QuadNode<T> Left { get; set; }
-
-            public QuadNode<T> Bottom { get; set; }
-
-            public QuadNode<T> Right { get; set; }
-
-
-            public Neighbours IsAdjacentToNode(QuadNode<T> node)
-            {
-
-                if (this.Top == node) return Neighbours.Top;
-                if (this.Left == node) return Neighbours.Left;
-                if (this.Bottom == node) return Neighbours.Bottom;
-                if (this.Right == node) return Neighbours.Right;
-
-                return Neighbours.None;
-            }
-
-            /// <summary>
-            /// Switchs the position of the node with a neighbouring node. Has in consideration the references of the neigbour node neighbours.
-            /// </summary>
-            /// <param name="neighbour">The relative position of the node we want to switch places with.</param>
-            /// <returns>Returns <see langword="false"/> if the neigbour node is null.</returns>
-            public bool SwitchNodePosition(Neighbours neighbour)
-            {
-
-                switch (neighbour)
-                {
-
-                    case Neighbours.Top:
-
-                        if (Top == null) return false;
-
-                        QuadNode<T> temporary = Top.MemberwiseClone() as QuadNode<T>;
-                        QuadNode<T> substitute = Top;
-
-                        ////assign nodes to the neigbour nodes of the involved pieces
-                        if (substitute.Left != null) substitute.Left.Right = this;
-                        if (substitute.Right != null) substitute.Right.Left = this;
-                        if (substitute.Top != null) substitute.Top.Bottom = this;
-
-                        if (this.Left != null) this.Left.Right = substitute;
-                        if (this.Bottom != null) this.Bottom.Top = substitute;
-                        if (this.Right != null) this.Right.Left = substitute;
-
-                        ////---------------------------------------
-
-                        ////assign nodes of the involved pieces
-                        substitute.Left = this.Left;
-                        substitute.Top = this;
-                        substitute.Bottom = this.Bottom;
-                        substitute.Right = this.Right;
-
-                        this.Top = temporary.Top;
-                        this.Left = temporary.Left;
-                        this.Right = temporary.Right;
-                        this.Bottom = substitute;
-
-                        return true;
-
-                    case Neighbours.Left:
-
-                        if (this.Left == null) return false;
-
-                        temporary = this.Left.MemberwiseClone() as QuadNode<T>;
-                        substitute = this.Left;
-
-                        //deal with neigbors of the involved pieces
-                        if (substitute.Left != null) substitute.Left.Right = this;
-                        if (substitute.Top != null) substitute.Top.Bottom = this;
-                        if (substitute.Bottom != null) substitute.Bottom.Top = this;
-
-                        if (this.Top != null) this.Top.Bottom = substitute;
-                        if (this.Right != null) this.Right.Left = substitute;
-                        if (this.Bottom != null) this.Bottom.Top = substitute;
-
-
-                        //assign end nodes of the involved pieces
-                        substitute.Left = this;
-                        substitute.Top = this.Top;
-                        substitute.Bottom = this.Bottom;
-                        substitute.Right = this.Right;
-
-                        this.Top = temporary.Top;
-                        this.Left = temporary.Left;
-                        this.Bottom = temporary.Bottom;
-                        this.Right = substitute;
-
-                        return true;
-
-                    case Neighbours.Bottom:
-
-                        if (this.Bottom == null) return false;
-
-                        temporary = this.Bottom.MemberwiseClone() as QuadNode<T>;
-                        substitute = this.Bottom;
-
-                        //deal with neigbors of the involved pieces
-                        if (substitute.Left != null) substitute.Left.Right = this;
-                        if (substitute.Bottom != null) substitute.Bottom.Top = this;
-                        if (substitute.Right != null) substitute.Right.Left = this;
-
-                        if (this.Top != null) this.Top.Bottom = substitute;
-                        if (this.Left != null) this.Left.Right = substitute;
-                        if (this.Right != null) this.Right.Left = substitute;
-
-
-                        //assing end nodes of the involved pieces
-                        this.Bottom.Bottom = this;
-                        substitute.Left = this.Left;
-                        substitute.Top = this.Top;
-                        substitute.Right = this.Right;
-
-                        this.Top = substitute;
-                        this.Left = temporary.Left;
-                        this.Bottom = temporary.Bottom;
-                        this.Right = temporary.Right;
-
-                        return true;
-
-                    case Neighbours.Right:
-
-                        if (this.Right == null) return false;
-
-                        temporary = this.Right.MemberwiseClone() as QuadNode<T>;
-                        substitute = this.Right;
-
-                        //assign end nodes of the neighbour nodes of the involved pieces
-                        if (substitute.Top != null) substitute.Top.Bottom = this;
-                        if (substitute.Right != null) substitute.Right.Left = this;
-                        if (substitute.Bottom != null) substitute.Bottom.Top = this;
-
-                        if (this.Top != null) this.Top.Bottom = substitute;
-                        if (this.Left != null) this.Left.Right = substitute;
-                        if (this.Bottom != null) this.Bottom.Top = substitute;
-
-
-                        //assign end nodes of the involved pieces
-                        substitute.Right = this;
-                        substitute.Left = this.Left;
-                        substitute.Bottom = this.Bottom;
-                        substitute.Top = this.Top;
-
-                        this.Top = temporary.Top;
-                        this.Left = substitute;
-                        this.Bottom = temporary.Bottom;
-                        this.Right = temporary.Right;
-
-                        return true;
-
-
-                    default:
-                        break;
-
-                }
-
-                return false;
-            }
-        }
-
 
         public Grid(int numberOfColumns)
         {
@@ -242,12 +57,48 @@ namespace DataStructures.Grid
         public bool AddNodeToBottom(QuadNode<T> node, int column)
         {
 
-            //get the most bottom node of the column
+            if (node == null) return false;
 
-            //check if I have to feed data into neigbour columns throught their height.
-            
-            //and now Im too tired to think.
-            return false;
+            int newNodeHeight = GetColumnHeight(column);
+
+            //add node to node above
+            if (newNodeHeight != 0)
+            {
+                QuadNode<T> aboveNode = GetTheMostBottomNode(column);
+                aboveNode.Bottom = node;
+                node.Top = aboveNode;
+            }
+            else
+            {
+                _columnsRoots[column] = node;
+            }
+
+
+            //add node to left column
+            if(column > 0)
+            {
+                QuadNode<T> leftNode = SearchColumn(_columnsRoots[column - 1], newNodeHeight);
+
+                if (leftNode != null)
+                {
+                    leftNode.Right = node;
+                    node.Left = leftNode;
+                }
+            }
+
+            //add node to right column
+            if(column < NumberOfColumns - 1)
+            {
+                QuadNode<T> rightNode = SearchColumn(_columnsRoots[column + 1], newNodeHeight);
+
+                if (rightNode != null)
+                {
+                    rightNode.Left = node;
+                    node.Right = rightNode;
+                }
+            }
+
+            return true;
         }
 
         protected QuadNode<T> GetTheMostBottomNode(int column)
@@ -302,12 +153,26 @@ namespace DataStructures.Grid
 
         }
 
+        public QuadNode<T> GetNode(int column, int height)
+        {
+            return SearchColumn(_columnsRoots[column], height);
+        }
+
         protected QuadNode<T> SearchColumn(QuadNode<T> root, QuadNode<T> node)
         {
             if (root == null) return null;
 
             if (root == node) return root;
             else return SearchColumn(root.Bottom, node);
+        }
+
+        protected QuadNode<T> SearchColumn(QuadNode<T> root, int height)
+        {
+
+            if (root == null) return null;
+            else if (height == 0) return root;
+            else return SearchColumn(root.Bottom, height - 1);
+
         }
 
         /// <summary>
