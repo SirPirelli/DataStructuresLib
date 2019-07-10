@@ -24,6 +24,20 @@ namespace DataStructures.Grid
         public QuadNode(int typeID)
         {
             TypeID = typeID;
+            Top = null;
+            Left = null;
+            Bottom = null;
+            Right = null;
+        }
+
+        public QuadNode(int typeID, T obj)
+        {
+            TypeID = typeID;
+            Object = obj;
+            Top = null;
+            Left = null;
+            Bottom = null;
+            Right = null;
         }
 
         public int TypeID { get; set; }
