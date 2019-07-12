@@ -57,13 +57,26 @@ namespace DataStructures.Grid
         public Neighbours IsAdjacentToNode(QuadNode<T> node)
         {
 
-            if (this.Top == node) return Neighbours.Top;
-            if (this.Left == node) return Neighbours.Left;
-            if (this.Bottom == node) return Neighbours.Bottom;
-            if (this.Right == node) return Neighbours.Right;
+            if (Top != null && Top == node)         return Neighbours.Top;
+            if (Left != null && Left == node)       return Neighbours.Left;
+            if (Bottom != null && Bottom == node)   return Neighbours.Bottom;
+            if (Right != null && Right == node)     return Neighbours.Right;
 
             return Neighbours.None;
         }
+
+        public Neighbours IsAdjacentToNode(T obj)
+        {
+
+            if (Top != null && Top.Object.Equals(obj))         return Neighbours.Top;
+            if (Left != null && Left.Object.Equals(obj))       return Neighbours.Left;
+            if (Bottom != null && Bottom.Object.Equals(obj))   return Neighbours.Bottom;
+            if (Right != null && Right.Object.Equals(obj))     return Neighbours.Right;
+
+            return Neighbours.None;
+        }
+
+       
 
         /// <summary>
         /// Switchs the position of the node with a neighbouring node. Has in consideration the references of the neigbour node neighbours.
