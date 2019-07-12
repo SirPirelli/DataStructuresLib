@@ -44,7 +44,6 @@ namespace DataStructures.Grid
 
         public T Object { get; set; }
 
-
         public QuadNode<T> Top { get; set; }
 
         public QuadNode<T> Left { get; set; }
@@ -65,17 +64,37 @@ namespace DataStructures.Grid
             return Neighbours.None;
         }
 
-        public Neighbours IsAdjacentToNode(T obj)
+        public bool HasSameTypeAdjacent()
         {
+            if ((Top != null && Top.TypeID == TypeID) ||
+                (Left != null && Left.TypeID == TypeID) ||
+                (Bottom != null && Bottom.TypeID == TypeID) ||
+                (Right != null && Right.TypeID == TypeID))
+                return true;
 
-            if (Top != null && Top.Object.Equals(obj))         return Neighbours.Top;
-            if (Left != null && Left.Object.Equals(obj))       return Neighbours.Left;
-            if (Bottom != null && Bottom.Object.Equals(obj))   return Neighbours.Bottom;
-            if (Right != null && Right.Object.Equals(obj))     return Neighbours.Right;
-
-            return Neighbours.None;
+            return false;
         }
 
+        public QuadNode<T> GetNeighbourNode(Neighbours neighbour)
+        {
+            switch(neighbour)
+            {
+                case Neighbours.Top:
+                    return Top;
+
+                case Neighbours.Left:
+                    return Left;
+
+                case Neighbours.Bottom:
+                    return Bottom;
+
+                case Neighbours.Right:
+                    return Right;
+
+                default:
+                    return null;
+            }
+        }
        
 
         /// <summary>

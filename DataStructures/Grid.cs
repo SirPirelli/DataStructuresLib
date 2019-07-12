@@ -57,16 +57,17 @@ namespace DataStructures.Grid
         public bool AddNodeToBottom(QuadNode<T> node, int column)
         {
 
-            if (node == null) return false;
-
             int newNodeHeight = GetColumnHeight(column);
 
             //add node to node above
             if (newNodeHeight != 0)
             {
                 QuadNode<T> aboveNode = GetTheMostBottomNode(column);
-                aboveNode.Bottom = node;
-                node.Top = aboveNode;
+                if (aboveNode != null)
+                {
+                    aboveNode.Bottom = node;
+                    node.Top = aboveNode;
+                }
             }
             else
             {
