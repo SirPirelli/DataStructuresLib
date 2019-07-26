@@ -237,6 +237,36 @@ namespace DataStructures.Grid
 
             return false;
         }
+
+        public bool SwitchNodePosition(QuadNode<T> otherNode)
+        {
+            if (otherNode == null) return false;
+
+            QuadNode<T> nodeClone = otherNode.MemberwiseClone() as QuadNode<T>;
+
+            if (otherNode.Top != null) otherNode.Top.Bottom = this;
+            if (otherNode.Left != null) otherNode.Left.Right = this;
+            if (otherNode.Bottom != null) otherNode.Bottom.Top = this;
+            if (otherNode.Right != null) otherNode.Right.Left = this;
+
+            if (Top != null) Top.Bottom = otherNode;
+            if (Left != null) Left.Right = otherNode;
+            if (Bottom != null) Bottom.Top = otherNode;
+            if (Right != null) Right.Left = otherNode;
+
+            otherNode.Top = Top;
+            otherNode.Bottom = Bottom;
+            otherNode.Left = Left;
+            otherNode.Right = Right;
+
+            Top = nodeClone.Top;
+            Left = nodeClone.Left;
+            Right = nodeClone.Right;
+            Bottom = nodeClone.Bottom;
+
+            return true;
+
+        }
     }
 
 }
