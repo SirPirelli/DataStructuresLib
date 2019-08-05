@@ -30,11 +30,12 @@
   },
   "libraries": {
     "Microsoft.NETCore.Platforms/1.1.0": {
-      "sha512": "kz0PEW2lhqygehI/d6XsPCQzD7ff7gUJaVGPVETX611eadGsA3A877GdSlU0LRVMCTH/+P3o2iDTak+S08V2+A==",
+      "sha512": "a/iSwnRZb+LHFk49hQOyThh/ZNC3vsbZsF65XwQIb863qF6msmhdQtxGXFL28Ob2NsCz/drEj28BJd/YPpLRBg==",
       "type": "package",
       "path": "microsoft.netcore.platforms/1.1.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/netstandard1.0/_._",
@@ -184,11 +185,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jose_\\Desktop\\Creative\\DataStructures\\DataStructuresLib\\DataStructures\\DataStructures.csproj",
+      "projectUniqueName": "C:\\Users\\jose_\\Desktop\\Creative\\Color Puzzle\\DataStructuresLib\\DataStructures\\DataStructures.csproj",
       "projectName": "DataStructures",
-      "projectPath": "C:\\Users\\jose_\\Desktop\\Creative\\DataStructures\\DataStructuresLib\\DataStructures\\DataStructures.csproj",
+      "projectPath": "C:\\Users\\jose_\\Desktop\\Creative\\Color Puzzle\\DataStructuresLib\\DataStructures\\DataStructures.csproj",
       "packagesPath": "C:\\Users\\jose_\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jose_\\Desktop\\Creative\\DataStructures\\DataStructuresLib\\DataStructures\\obj\\",
+      "outputPath": "C:\\Users\\jose_\\Desktop\\Creative\\Color Puzzle\\DataStructuresLib\\DataStructures\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

@@ -159,6 +159,18 @@ namespace DataStructures.Grid
             return SearchColumn(_columnsRoots[column], height);
         }
 
+        public QuadNode<T> GetNode(T obj)
+        {
+            for(int i = 0; i < _columnsRoots.Length; i++)
+            {
+                QuadNode<T> res = SearchColumn(_columnsRoots[i], obj);
+
+                if (res != null) return res;
+            }
+
+            return null;
+        }
+
         protected QuadNode<T> SearchColumn(QuadNode<T> root, QuadNode<T> node)
         {
             if (root == null) return null;
@@ -174,6 +186,13 @@ namespace DataStructures.Grid
             else if (height == 0) return root;
             else return SearchColumn(root.Bottom, height - 1);
 
+        }
+
+        protected QuadNode<T> SearchColumn(QuadNode<T> root, T obj)
+        {
+            if (root == null) return null;
+            if (root.Object.Equals(obj)) return root;
+            else return SearchColumn(root.Bottom, obj);
         }
 
         /// <summary>
